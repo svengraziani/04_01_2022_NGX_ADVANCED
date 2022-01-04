@@ -1,0 +1,101 @@
+<div class="card">
+  <div class="header">
+    <h2 class="title">Passenger Search</h2>
+  </div>
+  <div class="content">
+    <form (ngSubmit)="search()">
+      <div class="form-group">
+        <label>Name:</label>
+        <input [(ngModel)]="name" class="form-control" name="name" />
+      </div>
+      <div class="form-group">
+        <label>Firstname:</label>
+        <input [(ngModel)]="firstName" class="form-control" name="firstName" />
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="!name" class="btn btn-default" type="submit">
+          Search
+        </button>
+
+        <div *ngIf="passengers.length > 0">
+          {{ passengers.length }} passengers found!
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <table *ngIf="passengers.length > 0" class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Firstname</th>
+        <th>Bonus Miles</th>
+        <th>Passenger Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of passengers" [class.active]="f === selectedPassenger">
+        <td>{{ f.id }}</td>
+        <td>{{ f.name }}</td>
+        <td>{{ f.firstName }}</td>
+        <td>{{ f.bonusMiles }}</td>
+        <td>{{ f.passengerStatus }}</td>
+        <td>
+          <button (click)="select(f)" class="btn btn-primary">Select</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="selectedPassenger">
+  <form (ngSubmit)="savePassenger()">
+    <div class="form-group">
+      <label>Id</label>
+      <input
+        [(ngModel)]="selectedPassenger.id"
+        class="form-control"
+        name="id"
+      />
+    </div>
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        [(ngModel)]="selectedPassenger.name"
+        class="form-control"
+        name="name"
+      />
+    </div>
+    <div class="form-group">
+      <label>From</label>
+      <input
+        [(ngModel)]="selectedPassenger.firstName"
+        class="form-control"
+        name="firstName"
+      />
+    </div>
+    <div class="form-group">
+      <label>Bonus Miles</label>
+      <input
+        [(ngModel)]="selectedPassenger.bonusMiles"
+        class="form-control"
+        name="bonusMiles"
+      />
+    </div>
+    <div class="form-group">
+      <label>Passenger Status</label>
+      <input
+        [(ngModel)]="selectedPassenger.passengerStatus"
+        class="form-control"
+        name="passengerStatus"
+      />
+    </div>
+
+    <button class="btn btn-default" type="submit">Save</button>
+  </form>
+</div>

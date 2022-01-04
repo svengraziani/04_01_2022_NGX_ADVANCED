@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="header">
+    <h1 *ngIf="userName">Welcome, {{ userName }}!</h1>
+    <h1 *ngIf="!userName">Welcome!</h1>
+  </div>
+  <div class="content">
+    <div *ngIf="needsLogin$ && needsLogin$ | async" class="alert alert-warning">
+      You have been redirected to this page because you don't have the necessary
+      rights for the reqeusted action. Login with a respective user account!
+    </div>
+    <div *ngIf="showAcceptTerms" class="alert alert-warning">
+      Please accept the conditions first before moving on.
+    </div>
+
+    <div class="form-group">
+      <label
+        >Username<input [(ngModel)]="username" class="form-control"
+      /></label>
+    </div>
+    <div class="form-group">
+      <label
+        >Password<input [(ngModel)]="password" class="form-control"
+      /></label>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input [(ngModel)]="acceptTerms" name="acceptTerms" type="checkbox" />
+        I accept the standard business conditions
+      </label>
+    </div>
+    <button (click)="login()" class="btn btn-default">Login</button>
+    <button (click)="logout()" class="btn btn-default">Logout</button>
+  </div>
+</div>
+
+<div>&nbsp;</div>
+
+<div>
+  <!-- <custom-checkbox [value]="expertMode" (changed)="changed($event)" label="Expert Mode"></custom-checkbox>
+  {{expertMode}} -->
+</div>
